@@ -66,10 +66,24 @@ public fun Borders() {
     Spacer(Modifier.height(8.dp))
 
     GroupHeader(
-        "Group header with both components",
-        startComponent = { Icon(AllIconsKeys.General.ChevronRight, "Chevron") },
+        text = "Group header with both components",
+        modifier =
+            Modifier.clickable(indication = null, interactionSource = interactionSource) { open = !open }
+                .hoverable(interactionSource)
+                .pointerHoverIcon(PointerIcon(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR))),
+        startComponent = {
+            if (open) {
+                Icon(AllIconsKeys.General.ChevronDown, "Chevron")
+            } else {
+                Icon(AllIconsKeys.General.ChevronRight, "Chevron")
+            }
+        },
         endComponent = { Text("End component") },
     )
+    if (open) {
+        Text("Another Surprise!", Modifier.padding(start = 24.dp))
+    }
+
     Spacer(Modifier.height(8.dp))
 
     GroupHeader("Border alignment/expand")
