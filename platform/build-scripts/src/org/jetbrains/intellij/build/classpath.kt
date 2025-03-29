@@ -1,7 +1,7 @@
 // Copyright 2000-2025 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license.
 package org.jetbrains.intellij.build
 
-import com.intellij.platform.ijent.community.buildConstants.isIjentWslFsEnabledByDefaultForProduct
+import com.intellij.platform.ijent.community.buildConstants.isMultiRoutingFileSystemEnabledForProduct
 import com.intellij.platform.util.putMoreLikelyPluginJarsFirst
 import com.intellij.util.lang.HashMapZipFile
 import io.opentelemetry.api.common.AttributeKey
@@ -13,6 +13,7 @@ import org.jetbrains.intellij.build.impl.PlatformJarNames
 import org.jetbrains.intellij.build.impl.PlatformJarNames.PLATFORM_CORE_NIO_FS
 import org.jetbrains.intellij.build.impl.PluginLayout
 import org.jetbrains.intellij.build.impl.projectStructureMapping.DistributionFileEntry
+import org.jetbrains.intellij.build.io.AddDirEntriesMode
 import org.jetbrains.intellij.build.io.INDEX_FILENAME
 import org.jetbrains.intellij.build.io.PackageIndexBuilder
 import org.jetbrains.intellij.build.io.transformZipUsingTempFile
@@ -60,7 +61,7 @@ suspend fun reorderJar(relativePath: String, file: Path) {
 
 internal fun excludedLibJars(context: BuildContext): Set<String> =
   setOf(PlatformJarNames.TEST_FRAMEWORK_JAR) +
-  if (isIjentWslFsEnabledByDefaultForProduct(context.productProperties.platformPrefix)) setOf(PLATFORM_CORE_NIO_FS) else emptySet()
+  if (isMultiRoutingFileSystemEnabledForProduct(context.productProperties.platformPrefix)) setOf(PLATFORM_CORE_NIO_FS) else emptySet()
 
 internal suspend fun generateClasspath(context: BuildContext): List<String> {
   val homeDir = context.paths.distAllDir
@@ -131,8 +132,8 @@ fun reorderJar(jarFile: Path, orderedNames: List<String>) {
     return
   }
 
-  val packageIndexBuilder = PackageIndexBuilder()
-  return transformZipUsingTempFile(jarFile, packageIndexBuilder.indexWriter) { zipCreator ->
+  val packageIndexBuilder = PackageIndexBuilder(AddDirEntriesMode.NONE)
+  return transformZipUsingTempFile(jarFile, packageIndexBuilder) { zipCreator ->
     sourceZipFile.use { sourceZip ->
       val entries = sourceZip.entries.filterTo(mutableListOf()) { !it.isDirectory && it.name != INDEX_FILENAME }
       // ignore the existing package index on reorder - a new one will be computed even if it is the same, do not optimize for simplicity
@@ -160,9 +161,8 @@ fun reorderJar(jarFile: Path, orderedNames: List<String>) {
 
       for (entry in entries) {
         packageIndexBuilder.addFile(entry.name)
-        zipCreator.uncompressedData(nameString = entry.name, data = entry.getByteBuffer(sourceZip, null))
+        zipCreator.uncompressedData(path = entry.name, data = entry.getByteBuffer(sourceZip, null))
       }
-      packageIndexBuilder.writePackageIndex(zipCreator)
     }
   }
 }

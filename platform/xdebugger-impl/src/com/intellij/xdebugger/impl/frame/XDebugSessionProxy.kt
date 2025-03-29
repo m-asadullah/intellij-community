@@ -2,6 +2,7 @@
 package com.intellij.xdebugger.impl.frame
 
 import com.intellij.execution.process.ProcessHandler
+import com.intellij.execution.runners.ExecutionEnvironmentProxy
 import com.intellij.execution.ui.ConsoleView
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.actionSystem.AnAction
@@ -13,8 +14,10 @@ import com.intellij.openapi.util.NlsSafe
 import com.intellij.openapi.util.registry.Registry
 import com.intellij.xdebugger.XDebugSession
 import com.intellij.xdebugger.XDebugSessionListener
+import com.intellij.xdebugger.XDebuggerManager
 import com.intellij.xdebugger.XSourcePosition
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider
+import com.intellij.xdebugger.evaluation.XDebuggerEvaluator
 import com.intellij.xdebugger.frame.XExecutionStack
 import com.intellij.xdebugger.frame.XStackFrame
 import com.intellij.xdebugger.frame.XSuspendContext
@@ -32,6 +35,8 @@ import javax.swing.event.HyperlinkListener
 interface XDebugSessionProxy {
   val project: Project
 
+  val id: XDebugSessionId
+
   @get:NlsSafe
   val sessionName: String
   val sessionData: XDebugSessionData
@@ -46,10 +51,15 @@ interface XDebugSessionProxy {
   val sessionTab: XDebugSessionTab?
   val isStopped: Boolean
   val isPaused: Boolean
+  val isSuspended: Boolean
+  val isReadOnly: Boolean
+
+  val environmentProxy: ExecutionEnvironmentProxy?
 
   @get:NlsSafe
   val currentStateMessage: String
   val currentStateHyperlinkListener: HyperlinkListener?
+  val currentEvaluator: XDebuggerEvaluator?
 
   fun getCurrentPosition(): XSourcePosition?
   fun getFrameSourcePosition(frame: XStackFrame): XSourcePosition?
@@ -66,7 +76,6 @@ interface XDebugSessionProxy {
   fun putKey(sink: DataSink)
   fun updateExecutionPosition()
   fun onTabInitialized(tab: XDebugSessionTab)
-  suspend fun sessionId(): XDebugSessionId
 
   companion object {
     @JvmField
@@ -80,6 +89,8 @@ interface XDebugSessionProxy {
   class Monolith(val session: XDebugSession) : XDebugSessionProxy {
     override val project: Project
       get() = session.project
+    override val id: XDebugSessionId
+      get() = (session as XDebugSessionImpl).id
     override val sessionName: String
       get() = session.sessionName
     override val sessionData: XDebugSessionData
@@ -104,8 +115,14 @@ interface XDebugSessionProxy {
       get() = (session as? XDebugSessionImpl)?.sessionTab
     override val isPaused: Boolean
       get() = session.isPaused
+    override val environmentProxy: ExecutionEnvironmentProxy?
+      get() = null // Monolith shouldn't provide proxy, since the real one ExecutionEnvironment will be used
     override val isStopped: Boolean
       get() = session.isStopped
+    override val isReadOnly: Boolean
+      get() = (session as? XDebugSessionImpl)?.isReadOnly ?: false
+    override val isSuspended: Boolean
+      get() = session.isSuspended
 
     override val currentStateHyperlinkListener: HyperlinkListener?
       get() = session.debugProcess.currentStateHyperlinkListener
@@ -113,9 +130,8 @@ interface XDebugSessionProxy {
     override val currentStateMessage: String
       get() = session.debugProcess.currentStateMessage
 
-    override suspend fun sessionId(): XDebugSessionId {
-      return (session as XDebugSessionImpl).id()
-    }
+    override val currentEvaluator: XDebuggerEvaluator?
+      get() = session.debugProcess.evaluator
 
     override fun getCurrentPosition(): XSourcePosition? {
       return session.currentPosition
@@ -174,5 +190,12 @@ interface XDebugSessionProxy {
     override fun onTabInitialized(tab: XDebugSessionTab) {
       (session as? XDebugSessionImpl)?.tabInitialized(tab)
     }
+  }
+}
+
+private class MonolithCurrentSessionProxyProvider : CurrentXDebugSessionProxyProvider {
+  override fun provideCurrentSessionProxy(project: Project): XDebugSessionProxy? {
+    val session = XDebuggerManager.getInstance(project)?.currentSession ?: return null
+    return XDebugSessionProxyKeeper.getInstance(project).getOrCreateProxy(session)
   }
 }

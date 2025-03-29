@@ -7516,8 +7516,6 @@ public abstract class K2IntentionTestGenerated extends AbstractK2IntentionTest {
 
 
 
-
-
     @RunWith(JUnit3RunnerWithInners.class)
     @TestMetadata("../../../idea/tests/testData/intentions/evaluateCompileTimeExpression")
     public static class EvaluateCompileTimeExpression extends AbstractK2IntentionTest {
@@ -7691,7 +7689,49 @@ public abstract class K2IntentionTestGenerated extends AbstractK2IntentionTest {
         }
     }
 
+    @RunWith(JUnit3RunnerWithInners.class)
+    @TestMetadata("../../../idea/tests/testData/intentions/convertTrimIndentToTrimMargin")
+    public static class ConvertTrimIndentToTrimMargin extends AbstractK2IntentionTest {
+        @java.lang.Override
+        @org.jetbrains.annotations.NotNull
+        public final KotlinPluginMode getPluginMode() {
+            return KotlinPluginMode.K2;
+        }
 
+        private void runTest(String testDataFilePath) throws Exception {
+            KotlinTestUtils.runTest(this::doTest, this, testDataFilePath);
+        }
+
+        @TestMetadata("differentIndent.kt")
+        public void testDifferentIndent() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertTrimIndentToTrimMargin/differentIndent.kt");
+        }
+
+        @TestMetadata("notBlankFirst.kt")
+        public void testNotBlankFirst() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertTrimIndentToTrimMargin/notBlankFirst.kt");
+        }
+
+        @TestMetadata("notBlankLast.kt")
+        public void testNotBlankLast() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertTrimIndentToTrimMargin/notBlankLast.kt");
+        }
+
+        @TestMetadata("notRawString.kt")
+        public void testNotRawString() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertTrimIndentToTrimMargin/notRawString.kt");
+        }
+
+        @TestMetadata("simple.kt")
+        public void testSimple() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertTrimIndentToTrimMargin/simple.kt");
+        }
+
+        @TestMetadata("startWithDollarSign.kt")
+        public void testStartWithDollarSign() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertTrimIndentToTrimMargin/startWithDollarSign.kt");
+        }
+    }
 
     @RunWith(JUnit3RunnerWithInners.class)
     @TestMetadata("../../../idea/tests/testData/intentions/iterateExpression")
@@ -7967,7 +8007,39 @@ public abstract class K2IntentionTestGenerated extends AbstractK2IntentionTest {
 
 
 
+    @RunWith(JUnit3RunnerWithInners.class)
+    @TestMetadata("../../../idea/tests/testData/intentions/convertLateinitPropertyToNullable")
+    public static class ConvertLateinitPropertyToNullable extends AbstractK2IntentionTest {
+        @java.lang.Override
+        @org.jetbrains.annotations.NotNull
+        public final KotlinPluginMode getPluginMode() {
+            return KotlinPluginMode.K2;
+        }
 
+        private void runTest(String testDataFilePath) throws Exception {
+            KotlinTestUtils.runTest(this::doTest, this, testDataFilePath);
+        }
+
+        @TestMetadata("initializer.kt")
+        public void testInitializer() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertLateinitPropertyToNullable/initializer.kt");
+        }
+
+        @TestMetadata("nullable.kt")
+        public void testNullable() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertLateinitPropertyToNullable/nullable.kt");
+        }
+
+        @TestMetadata("simple.kt")
+        public void testSimple() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertLateinitPropertyToNullable/simple.kt");
+        }
+
+        @TestMetadata("val.kt")
+        public void testVal() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertLateinitPropertyToNullable/val.kt");
+        }
+    }
 
 
 
@@ -10835,6 +10907,130 @@ public abstract class K2IntentionTestGenerated extends AbstractK2IntentionTest {
     }
 
     @RunWith(JUnit3RunnerWithInners.class)
+    @TestMetadata("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString")
+    public static class ConvertFromMultiDollarToRegularString extends AbstractK2IntentionTest {
+        @java.lang.Override
+        @org.jetbrains.annotations.NotNull
+        public final KotlinPluginMode getPluginMode() {
+            return KotlinPluginMode.K2;
+        }
+
+        private void runTest(String testDataFilePath) throws Exception {
+            KotlinTestUtils.runTest(this::doTest, this, testDataFilePath);
+        }
+
+        @TestMetadata("inapplicableNotPrefixed.kt")
+        public void testInapplicableNotPrefixed() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/inapplicableNotPrefixed.kt");
+        }
+
+        @TestMetadata("singleQuotedEscapeSequences.kt")
+        public void testSingleQuotedEscapeSequences() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedEscapeSequences.kt");
+        }
+
+        @TestMetadata("singleQuotedNoInterpolation.kt")
+        public void testSingleQuotedNoInterpolation() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedNoInterpolation.kt");
+        }
+
+        @TestMetadata("singleQuotedSafeDollarSequence.kt")
+        public void testSingleQuotedSafeDollarSequence() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedSafeDollarSequence.kt");
+        }
+
+        @TestMetadata("singleQuotedSimpleNameEntry.kt")
+        public void testSingleQuotedSimpleNameEntry() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedSimpleNameEntry.kt");
+        }
+
+        @TestMetadata("singleQuotedTripleDollarAndUnsafe.kt")
+        public void testSingleQuotedTripleDollarAndUnsafe() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedTripleDollarAndUnsafe.kt");
+        }
+
+        @TestMetadata("singleQuotedUnsafeDollarSequence1.kt")
+        public void testSingleQuotedUnsafeDollarSequence1() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedUnsafeDollarSequence1.kt");
+        }
+
+        @TestMetadata("singleQuotedUnsafeDollarSequence2.kt")
+        public void testSingleQuotedUnsafeDollarSequence2() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedUnsafeDollarSequence2.kt");
+        }
+
+        @TestMetadata("singleQuotedUnsafeDollarSequence3.kt")
+        public void testSingleQuotedUnsafeDollarSequence3() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedUnsafeDollarSequence3.kt");
+        }
+
+        @TestMetadata("singleQuotedUnsafeDollarSequence4.kt")
+        public void testSingleQuotedUnsafeDollarSequence4() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedUnsafeDollarSequence4.kt");
+        }
+
+        @TestMetadata("singleQuotedUnsafeDollarSequence5.kt")
+        public void testSingleQuotedUnsafeDollarSequence5() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/singleQuotedUnsafeDollarSequence5.kt");
+        }
+
+        @TestMetadata("tripleQuotedBlockEntry.kt")
+        public void testTripleQuotedBlockEntry() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedBlockEntry.kt");
+        }
+
+        @TestMetadata("tripleQuotedEscapeSequences.kt")
+        public void testTripleQuotedEscapeSequences() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedEscapeSequences.kt");
+        }
+
+        @TestMetadata("tripleQuotedNoInterpolation.kt")
+        public void testTripleQuotedNoInterpolation() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedNoInterpolation.kt");
+        }
+
+        @TestMetadata("tripleQuotedSafeDollarSequence.kt")
+        public void testTripleQuotedSafeDollarSequence() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedSafeDollarSequence.kt");
+        }
+
+        @TestMetadata("tripleQuotedSimpleNameEntry.kt")
+        public void testTripleQuotedSimpleNameEntry() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedSimpleNameEntry.kt");
+        }
+
+        @TestMetadata("tripleQuotedTripleDollarAndUnsafe.kt")
+        public void testTripleQuotedTripleDollarAndUnsafe() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedTripleDollarAndUnsafe.kt");
+        }
+
+        @TestMetadata("tripleQuotedUnsafeDollarSequence1.kt")
+        public void testTripleQuotedUnsafeDollarSequence1() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedUnsafeDollarSequence1.kt");
+        }
+
+        @TestMetadata("tripleQuotedUnsafeDollarSequence2.kt")
+        public void testTripleQuotedUnsafeDollarSequence2() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedUnsafeDollarSequence2.kt");
+        }
+
+        @TestMetadata("tripleQuotedUnsafeDollarSequence3.kt")
+        public void testTripleQuotedUnsafeDollarSequence3() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedUnsafeDollarSequence3.kt");
+        }
+
+        @TestMetadata("tripleQuotedUnsafeDollarSequence4.kt")
+        public void testTripleQuotedUnsafeDollarSequence4() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedUnsafeDollarSequence4.kt");
+        }
+
+        @TestMetadata("tripleQuotedUnsafeDollarSequence5.kt")
+        public void testTripleQuotedUnsafeDollarSequence5() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertFromMultiDollarToRegularString/tripleQuotedUnsafeDollarSequence5.kt");
+        }
+    }
+
+    @RunWith(JUnit3RunnerWithInners.class)
     @TestMetadata("../../../idea/tests/testData/intentions/branched/unfolding/returnToWhen")
     public abstract static class ReturnToWhen extends AbstractK2IntentionTest {
 
@@ -12357,6 +12553,11 @@ public abstract class K2IntentionTestGenerated extends AbstractK2IntentionTest {
             runTest("../../../idea/tests/testData/intentions/convertParameterToReceiver/recursiveCall1.kt");
         }
 
+        @TestMetadata("simplifiedQualifier.kt")
+        public void testSimplifiedQualifier() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertParameterToReceiver/simplifiedQualifier.kt");
+        }
+
         @TestMetadata("topLevelFun.kt")
         public void testTopLevelFun() throws Exception {
             runTest("../../../idea/tests/testData/intentions/convertParameterToReceiver/topLevelFun.kt");
@@ -13201,6 +13402,11 @@ public abstract class K2IntentionTestGenerated extends AbstractK2IntentionTest {
         @TestMetadata("firstNestedInterpolationIsNotString.kt")
         public void testFirstNestedInterpolationIsNotString() throws Exception {
             runTest("../../../idea/tests/testData/intentions/convertToConcatenatedStringMultiDollarPrefix/firstNestedInterpolationIsNotString.kt");
+        }
+
+        @TestMetadata("firstToStringWithParentheses.kt")
+        public void testFirstToStringWithParentheses() throws Exception {
+            runTest("../../../idea/tests/testData/intentions/convertToConcatenatedStringMultiDollarPrefix/firstToStringWithParentheses.kt");
         }
 
         @TestMetadata("hiddenNestedDollarSequence.kt")

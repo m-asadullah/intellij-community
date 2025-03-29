@@ -336,14 +336,13 @@ a:com.intellij.xdebugger.impl.actions.XDebuggerSuspendedActionHandler
 - com.intellij.xdebugger.impl.actions.handlers.XDebuggerActionHandler
 - <init>():V
 - s:isEnabled(com.intellij.xdebugger.XDebugSession):Z
-- p:isEnabled(com.intellij.xdebugger.XDebugSession,com.intellij.openapi.actionSystem.DataContext):Z
 a:com.intellij.xdebugger.impl.actions.handlers.XDebuggerActionHandler
 - com.intellij.xdebugger.impl.actions.DebuggerActionHandler
 - <init>():V
 - isEnabled(com.intellij.openapi.project.Project,com.intellij.openapi.actionSystem.AnActionEvent):Z
-- pa:isEnabled(com.intellij.xdebugger.XDebugSession,com.intellij.openapi.actionSystem.DataContext):Z
+- p:isEnabled(com.intellij.xdebugger.XDebugSession,com.intellij.openapi.actionSystem.DataContext):Z
 - perform(com.intellij.openapi.project.Project,com.intellij.openapi.actionSystem.AnActionEvent):V
-- pa:perform(com.intellij.xdebugger.XDebugSession,com.intellij.openapi.actionSystem.DataContext):V
+- p:perform(com.intellij.xdebugger.XDebugSession,com.intellij.openapi.actionSystem.DataContext):V
 c:com.intellij.xdebugger.impl.breakpoints.XBreakpointPanelProvider
 - com.intellij.xdebugger.impl.breakpoints.ui.BreakpointPanelProvider
 - <init>():V
@@ -694,7 +693,6 @@ com.intellij.xdebugger.impl.frame.XStackFrameContainerEx
 c:com.intellij.xdebugger.impl.frame.XStandaloneVariablesView
 - com.intellij.xdebugger.impl.frame.XVariablesViewBase
 - <init>(com.intellij.openapi.project.Project,com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider,com.intellij.xdebugger.frame.XStackFrame):V
-- processSessionEvent(com.intellij.xdebugger.impl.frame.XDebugView$SessionEvent,com.intellij.xdebugger.XDebugSession):V
 - rebuildView():V
 Fc:com.intellij.xdebugger.impl.frame.XValueMarkers
 - canMarkValue(com.intellij.xdebugger.frame.XValue):Z
@@ -1404,11 +1402,6 @@ c:com.intellij.xdebugger.impl.ui.tree.actions.ShowReferringObjectsAction
 - p:isEnabled(com.intellij.xdebugger.impl.ui.tree.nodes.XValueNodeImpl,com.intellij.openapi.actionSystem.AnActionEvent):Z
 - p:perform(com.intellij.xdebugger.impl.ui.tree.nodes.XValueNodeImpl,java.lang.String,com.intellij.openapi.actionSystem.AnActionEvent):V
 - update(com.intellij.openapi.actionSystem.AnActionEvent):V
-c:com.intellij.xdebugger.impl.ui.tree.actions.XCopyValueAction
-- com.intellij.xdebugger.impl.ui.tree.actions.XFetchValueActionBase
-- <init>():V
-- getActionUpdateThread():com.intellij.openapi.actionSystem.ActionUpdateThread
-- p:handle(com.intellij.openapi.project.Project,java.lang.String,com.intellij.xdebugger.impl.ui.tree.XDebuggerTree):V
 a:com.intellij.xdebugger.impl.ui.tree.actions.XDebuggerTreeActionBase
 - com.intellij.openapi.actionSystem.AnAction
 - <init>():V

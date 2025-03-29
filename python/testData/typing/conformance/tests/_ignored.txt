@@ -11,7 +11,6 @@ callables_annotation.py
 callables_kwargs.py
 callables_protocol.py
 callables_subtyping.py
-classes_classvar.py
 classes_override.py
 constructors_call_init.py
 constructors_call_metaclass.py
@@ -32,8 +31,6 @@ exceptions_context_managers.py
 generics_base_class.py
 generics_defaults.py
 generics_defaults_referential.py
-generics_defaults_specialization.py
-generics_paramspec_basic.py
 generics_paramspec_components.py
 generics_paramspec_semantics.py
 generics_self_advanced.py
