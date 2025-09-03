@@ -1,9 +1,10 @@
-name: IntelliJ IDEA (Windows Only - 251.28293)
+name: IntelliJ IDEA (OS=Windows)
 
 on:
   push:
     branches:
-      - 251.28293
+      # - 251.28293
+      - "master"
     tags:
       - 'idea/*'
   workflow_dispatch:
