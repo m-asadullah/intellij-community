@@ -1,0 +1,43 @@
+name: IntelliJ IDEA (Windows Only - 251.28293)
+
+on:
+  push:
+    branches:
+      - 251.28293
+    tags:
+      - 'idea/*'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Why run this?'
+        required: false
+        default: 'Manual trigger for Windows build on 251.28293'
+
+env:
+  artifacts_dir: 'out/idea-ce/artifacts'
+
+permissions:
+  contents: read    # for actions/checkout
+  actions: read
+  # add more if upload_ide requires write access to releases or packages
+
+jobs:
+  build-windows:
+    name: Build IntelliJ IDEA Windows EXE
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout IntelliJ Community
+        uses: actions/checkout@v4.2.2
+
+      - name: Build Windows EXE
+        uses: ./.github/actions/build_ide
+        with:
+          os: windows
+          extension: exe
+
+      - name: Upload Windows EXE
+        uses: ./.github/actions/upload_ide
+        with:
+          os: windows
+          extension: exe
+          artifacts_dir: ${{ env.artifacts_dir }}
