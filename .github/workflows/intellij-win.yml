@@ -12,7 +12,7 @@ on:
       reason:
         description: 'Why run this?'
         required: false
-        default: 'Manual trigger for Windows build on 251.28293'
+        default: 'Manual trigger for Windows build on specfic branch'
 
 env:
   artifacts_dir: 'out/idea-ce/artifacts'
