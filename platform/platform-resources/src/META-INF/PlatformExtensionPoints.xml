@@ -609,6 +609,9 @@
     <extensionPoint name="usageFilteringRuleCustomizer" interface="com.intellij.usages.rules.UsageFilteringRuleCustomizer" dynamic="true"/>
 
     <extensionPoint name="endUserAgreementUpdater" beanClass="com.intellij.ide.gdpr.EndUserAgreement$PluginAgreementUpdateDescriptor" dynamic="true"/>
+    <extensionPoint name="aiDataCollectionExternalSettings"
+                    interface="com.intellij.ide.gdpr.ui.consents.AiDataCollectionExternalSettings"
+                    dynamic="true"/>
 
     <extensionPoint name="cefDelegate" interface="com.intellij.ui.jcef.CefDelegate" dynamic="false"/>
 
@@ -695,5 +698,9 @@
                     beanClass="com.intellij.ui.split.SplitComponentProviderBean">
       <with attribute="implementation" implements="com.intellij.ui.split.SplitComponentProvider"/>
     </extensionPoint>
+
+    <extensionPoint qualifiedName="com.intellij.ide.gdpr.traceConsentManager"
+                    interface="com.intellij.ide.gdpr.trace.TraceConsentManager"
+                    dynamic="true"/>
   </extensionPoints>
 </idea-plugin>
