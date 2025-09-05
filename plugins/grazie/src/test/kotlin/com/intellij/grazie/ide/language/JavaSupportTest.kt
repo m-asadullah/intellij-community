@@ -142,6 +142,14 @@ class JavaSupportTest : GrazieTestBase() {
     myFixture.checkHighlighting()
   }
 
+  fun `test no highlighting inside of markdown code`() {
+    runHighlightTestForFile("ide/language/java/MarkdownCode.java")
+  }
+
+  fun `test java keeps trailing spaces properly`() {
+    runHighlightTestForFile("ide/language/java/Trailing.java")
+  }
+
   private fun doTest(beforeText: String, afterText: String, hint: String) {
     myFixture.configureByText("a.java", beforeText)
     val intentionAction = myFixture.findSingleIntention(hint)
